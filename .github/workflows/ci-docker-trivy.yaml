@@ -13,8 +13,8 @@ jobs:
 
     env:
       IMAGE_NAME: ${{vars.IMAGE_NAME}}
-      IMAGE_TAG: latest
-      DOCKER_REGISTRY: cheikhms
+      IMAGE_TAG: ${{vars.IMAGE_TAG}}
+      DOCKER_REGISTRY: ${{vars.DOCKER_REGISTRY}}
 
     steps:
       - name: Récupération du code
@@ -23,7 +23,7 @@ jobs:
       - name: Test Varibales
         run: |
           echo "Varibale MYVAR  ${{ vars.MYVAR }} "
-          echo "Varibale IMAGE_NAME $IMAGE_NAME ${{vars.IMAGE_NAME}}"
+          echo "Varibale IMAGE_NAME $IMAGE_NAME "
           echo "Varibale DOCKER_REGISTRY  $DOCKER_REGISTRY "
 
 
@@ -33,7 +33,7 @@ jobs:
 
       - name: Build de l’image Docker
         run: |
-          docker build -t $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG .
+          docker build -t $DOCKER_REGISTRY/${IMAGE_NAME}:$IMAGE_TAG .
         
       - name: Test de l’image Docker
         run: |
